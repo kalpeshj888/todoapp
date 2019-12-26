@@ -17,19 +17,19 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const createdAt =  new Date().toISOString()  
   const newTodo: CreateTodoRequest = JSON.parse(event.body)
   
-  const newItem = {
+  const item = {
     userId: userId, 
     createdAt: createdAt,
     todoId: todoId,
     name: newTodo.name,
-    dueDate: newTodo.dueDate,
+    //dueDate: newTodo.dueDate,
     done : false,
     attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}`
   }
 
   await docClient.put({
     TableName: todosTable,
-    Item: newItem
+    Item: item
   }).promise()
   
   // TODO: Implement creating a new TODO item
@@ -40,7 +40,9 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       'Access-Control-Allow-Credentials': true
     },
     body: JSON.stringify({
-      newItem
+      item
     })
   }
 }
+
+

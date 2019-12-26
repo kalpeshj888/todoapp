@@ -65,6 +65,7 @@ functions:
          path: todos
          cors: true
          authorizer: Auth
+         reqValidatorName: RequestBodyValidator
 
   # TODO: Configure this function
   UpdateTodo:
